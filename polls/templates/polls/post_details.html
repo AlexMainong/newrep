@@ -1,0 +1,28 @@
+{% extends 'polls/post_base.html' %}
+<head>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+</head>
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        {% if username %}
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+        {% endif %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% for comment in comments %}
+    <p>{{ comment.text }}</p>
+{% endfor %}
+<form action="{% url 'new_comment' post.pk %}" method="POST">
+  {% csrf_token %}
+  {{ comment_form }}
+  <input type="submit" class="button" value="Отправить">
+</form>
+{% endblock %}

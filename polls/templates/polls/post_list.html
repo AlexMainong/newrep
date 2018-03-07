@@ -1,0 +1,30 @@
+{% extends 'polls/post_base.html' %}
+{% block content %}
+<div>
+
+{% for post in posts %}
+    <h1><a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a></h1>
+</div>
+<div>
+  <p>{{ post.text|linebreaksbr }}</p>
+  <p>published: {{ post.published_date }}</p>
+{% endfor %}
+
+</div>
+
+<div class="pagination">
+        <span>
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+      </span>
+</div>
+{% endblock %}
