@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Post(models.Model):
@@ -20,4 +21,6 @@ class Post(models.Model):
         return self.title
 class Comments(models.Model):
     text = models.TextField()
-    post_comment = models.ForeignKey(Post, blank=True)
+    post_comment = models.ForeignKey(Post, null=True)
+    comment_date = models.DateTimeField(null=True)
+    comment_from = models.ForeignKey(User, null=True)

@@ -43,25 +43,14 @@ def post_details(request, pk):
     comments = Comments.objects.filter(post_comment=pk)
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'polls/post_details.html', {'post': post, 'username': auth.get_user(request).username, 'comment_form': comment_form, 'comments': comments})
-def listing(request):
-    contacts_list = Post.objects.all()
-    paginator = Paginator(contacts_list, 4)
-    page = request.GET.get('page')
-    try:
-        contacts = paginator.page(page)
-    except PageNotAnInteger:
-        contacts = paginator.page(1)
-    except EmptyPage:
-        contacts = paginator.page(paginator.num_pages)
 
-    return render(request, 'polls/post_list.html',  {'contacts': contacts})
 def new_comment(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = CommentsForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post_comment = Post.objects.get(pk=post.pk)
+            comment.post_comment = Post.objects.get(id=post.pk)
             form.save()
     return redirect(reverse('post_details', kwargs={"pk": post.pk}))
 

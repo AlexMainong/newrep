@@ -19,6 +19,8 @@
     </div>
 {% for comment in comments %}
     <p>{{ comment.text }}</p>
+    <hr/>
+    <p>{{ comment.comment_from.username }} {{ comment.comment_date }}</p>
 {% endfor %}
 <form action="{% url 'new_comment' post.pk %}" method="POST">
   {% csrf_token %}
