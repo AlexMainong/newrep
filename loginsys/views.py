@@ -15,6 +15,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request,user)
+            context['username'] = user
             return redirect("/")
         else:
             context['login_error'] = "Пользователь не найден"
@@ -29,6 +30,7 @@ def register(request):
     context = {}
     context.update(csrf(request))
     context['form'] = UserCreationForm()
+    context['username'] = auth.get_user(request).username
     if request.method == "POST":
         newuser_form = UserCreationForm(request.POST)
         if newuser_form.is_valid():
@@ -38,5 +40,4 @@ def register(request):
             return redirect("/")
         else:
             context['form'] = newuser_form
-
     return render(request, 'register.html', context)

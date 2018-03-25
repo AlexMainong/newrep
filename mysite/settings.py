@@ -1,3 +1,4 @@
+
 """
 Django settings for mysite project.
 
@@ -12,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -30,6 +32,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,7 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls', 'loginsys', 'el_pagination', 
+    'polls', 'loginsys', 'el_pagination', 'polls.templatetags.poll_extras',
+    ##'ckeditor', 'ckeditor_uploader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,3 +109,19 @@ STATIC_ROOT = '/static/'
 STATICFILES_DIRS = (
     ('static',
     '/home/shafagat/myvenv/bin/project/static'),)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_CONFIGS = {
+       'default': {
+           'toolbar':[['Source', 'Link', 'Unlink', 'SpecialChar', 'Image', 'CodeSnippet']],
+           'height': 400,
+           'width': 900,
+           'removePlugins': 'stylesheetparser',
+           'extraPlugins': 'codesnippet',
+       },
+    }
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_BROWSE_SHOW_DIRS = True

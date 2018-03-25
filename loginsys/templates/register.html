@@ -1,9 +1,15 @@
-{% extends 'polls/post_base.html' %}
-{% block login %}
-<div class="">
+{% extends 'post_base.html' %}
+{% block register %}
+<div class="body-f">
+<div class="row">
+<div class="body">
+<div class="form">
   <form action="/auth/register/" method="post">
     {% csrf_token %} {{ form }}
-    <input type="submit" class="butten" value="Зарегистрироваться">
+    <input type="submit" class="button" value="Зарегистрироваться">
   </form>
+</div>
+</div>
+</div>
 </div>
 {% endblock %}

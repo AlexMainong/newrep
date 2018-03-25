@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib import admin
+
 
 
 class Post(models.Model):
@@ -20,7 +22,19 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 class Comments(models.Model):
-    text = models.TextField()
+    text = models.TextField(max_length=140)
     post_comment = models.ForeignKey(Post, null=True)
     comment_date = models.DateTimeField(null=True)
     comment_from = models.ForeignKey(User, null=True)
+class PostStatistic(models.Model):
+    post = models.ForeignKey(Post)                    # внешний ключ на статью
+    date = models.DateField('Дата', default=timezone.now)   # дата
+    views = models.IntegerField('Просмотры', default=0)     # количество просмотров в эту дату
+
+    def __str__(self):
+        return self.post.title
+
+
+class PostStatisticAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'date', 'views')  # отображаемые поля в админке
+    search_fields = ('__str__', )

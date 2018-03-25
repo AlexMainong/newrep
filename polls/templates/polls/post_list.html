@@ -1,17 +1,36 @@
-{% extends 'polls/post_base.html' %}
+{% extends 'post_base.html' %}
 {% load el_pagination_tags %}
 {% block content %}
-<div>
 {% paginate posts %}
-{% for post in posts %}
-    <h1><a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a></h1>
+
+<div class="add-5">
+{% if username %}
+     <a href="{% url 'post_new' %}">Написать статью</a>
+{% endif %}
 </div>
-<div>
-  <p>{{ post.text|linebreaksbr }}</p>
-  <p>published: {{ post.published_date }}</p>
+
+<div class="body-f">
+<div class="row">
+<div class="body">
+
+{% for post in posts %}
+<div class="post">
+    <h1><a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a></h1>
+    <p>{{ post.text|linebreaks  }}</p>
+    <p>Дата публикации: {{ post.published_date|date:"d M Y" }}</p>
+</div>
 {% endfor %}
+</div>
+</div>
+
+
+<div class="pagination">
 {% get_pages %}
 {% if pages.paginated %}
     {{ pages.get_rendered }}
 {% endif %}
+</div>
+<div class="popular">{% include 'polls/popular.html' %}</div>
+</div>
+
 {% endblock %}

@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static "static/css/foundation.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "static/css/style.css" %}">
+    </head>
+             <div class="top-bar">
+                 <a class="home" href="{% url 'post_list' %}">Блог</a>
+
+                  <section class="top-bar-right"
+                   {% if username %}
+                   <li><a href="/auth/logout/">Выйти ({{ username }})</a></li>
+                   {% else %}
+                   <li><a href="/auth/login/">Войти</a></li>
+                   {% endif %}
+              </section>
+             </div>
+         </body>
+{% block login %}{% endblock %}
+{% block edit %}{% endblock %}
+{% block content %}{% endblock %}
+{% block register %}{% endblock %}
+</html>
