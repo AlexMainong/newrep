@@ -11,5 +11,5 @@ urlpatterns = [
      url(r'^admin', include(admin.site.urls), name='admin'),
      url(r'^auth/', include('loginsys.urls'), name='loginsys'),
      url(r'^', include('polls.urls'), name='polls'),
-     url(r'^ckeditor/', include('ckeditor_uploader.urls'))
+     ##url(r'^ckeditor/', include('ckeditor_uploader.urls'))
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
