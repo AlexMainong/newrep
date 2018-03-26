@@ -1,9 +1,23 @@
-{% if popular_list %}
-      <ul class="list-group">
-      <li class="list-group-item active"><strong>Популярные публикации за неделю</strong></li>
-      {% for pop_post in popular_list %}
-          <li class="">
-          <a href="{% url 'post_details' pk=pop_post.post_id %}">{{ pop_post.post__title }}</a>
-          </li>
-      {% endfor %}
-      {% endif %}
+from django import template
+from django.db.models import Sum
+from django.utils import timezone
+from django.conf import settings
+from django.shortcuts import render
+from polls.models import PostStatistic
+
+register = template.Library()
+
+
+@register.assignment_tag
+def get_popular():
+    context = {}
+    popular = PostStatistic.objects.filter(
+        date__range=[timezone.now() - timezone.timedelta(7), timezone.now()]
+    ).values(
+        'post_id', 'post__title'
+    ).annotate(
+
+        view=Sum('views')
+    ).order_by(
+        '-views')[:5]
+    return popular

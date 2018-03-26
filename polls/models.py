@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -6,7 +7,7 @@ from django.contrib import admin
 
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User', on_delete=models.DO_NOTHING,)
     title = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(
@@ -23,11 +24,11 @@ class Post(models.Model):
         return self.title
 class Comments(models.Model):
     text = models.TextField(max_length=140)
-    post_comment = models.ForeignKey(Post, null=True)
+    post_comment = models.ForeignKey(Post, null=True, on_delete=models.DO_NOTHING)
     comment_date = models.DateTimeField(null=True)
-    comment_from = models.ForeignKey(User, null=True)
+    comment_from = models.ForeignKey(User, null=True, on_delete=models.DO_NOTHING,)
 class PostStatistic(models.Model):
-    post = models.ForeignKey(Post)                    # внешний ключ на статью
+    post = models.ForeignKey(Post, on_delete=models.DO_NOTHING,)                    # внешний ключ на статью
     date = models.DateField('Дата', default=timezone.now)   # дата
     views = models.IntegerField('Просмотры', default=0)     # количество просмотров в эту дату
 

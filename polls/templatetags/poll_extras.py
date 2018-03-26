@@ -19,5 +19,5 @@ def get_popular():
 
         view=Sum('views')
     ).order_by(
-        '-views')[:5] 
+        '-views')[:5]
     return popular

@@ -31,7 +31,12 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+TEMPLATE_LOADERS = (
+   'django.template.loaders.filesystem.Loader',
+   'django.template.loaders.app_directories.Loader',
+   'django.template.loaders.eggs.Loader',
+   'django.template.loaders.app_directories.load_template_source',
+)
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -40,7 +45,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls', 'loginsys', 'el_pagination', 'polls.templatetags.poll_extras',
+    'polls', 'loginsys', 'el_pagination',
+    'polls.templatetags', ##'polls.templatetags.poll_extras', 
+
     ##'ckeditor', 'ckeditor_uploader',
 )
 
