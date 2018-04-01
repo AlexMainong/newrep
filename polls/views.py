@@ -11,6 +11,12 @@ from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
+import json
+from django.views.generic import RedirectView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import authentication, permissions
 
 
 def post_edit(request, pk):
@@ -68,4 +74,40 @@ def new_comment(request, pk):
             comment.comment_date = timezone.now()
             form.save()
     return redirect(reverse('post_details', kwargs={"pk": post.pk}))
+
+def add_like(request, pk):
+    post = get_object_or_404(Post, pk=pk )
+    print("slug")
+    user = request.user
+    if user.is_authenticated():
+        if user in post.likes.all():
+            post.likes.remove(user)
+        else:
+            post.likes.add(user)
+    return redirect("/")
+
+class PostLikeAPIToggle(APIView):
+    authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, format=None, pk=None):
+        obj = get_object_or_404(Post, pk=pk)
+        user = self.request.user
+        updated = False
+        liked = False
+        if user.is_authenticated():
+            if user in obj.likes.all():
+                liked = False
+                obj.likes.remove(user)
+            else:
+                liked = True
+                obj.likes.add(user)
+            updated = True
+        data = {
+            "updated": updated,
+            "liked": liked
+        }
+        return Response(data)
+
+
 # Create your views here.

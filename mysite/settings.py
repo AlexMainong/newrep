@@ -46,9 +46,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls', 'loginsys', 'el_pagination',
-    'polls.templatetags', ##'polls.templatetags.poll_extras', 
-
-    ##'ckeditor', 'ckeditor_uploader',
+    'polls.templatetags', ##'polls.templatetags.poll_extras',
+    'ckeditor',
+    'ckeditor_uploader', 'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -122,9 +122,9 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
        'default': {
-           'toolbar':[['Source', 'Link', 'Unlink', 'SpecialChar', 'Image', 'CodeSnippet']],
+           'toolbar':[['Link', 'Unlink', 'SpecialChar', 'Image', 'CodeSnippet']],
            'height': 400,
-           'width': 900,
+           'width': 560,
            'removePlugins': 'stylesheetparser',
            'extraPlugins': 'codesnippet',
        },

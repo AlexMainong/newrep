@@ -5,7 +5,7 @@
 
 <div class="add-5">
 {% if username %}
-     <a href="{% url 'post_new' %}">Написать статью</a>
+     <a href="{% url 'post_new' %}"><i class="fi-pencil"></i>Написать статью</a>
 {% endif %}
 </div>
 
@@ -16,21 +16,28 @@
 {% for post in posts %}
 <div class="post">
     <h1><a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a></h1>
-    <p>{{ post.text|linebreaks  }}</p>
-    <p>Дата публикации: {{ post.published_date|date:"d M Y" }}</p>
+    <p>{{ post.text| safe  }} </p>
+    <span><a class='like-btn' data-href='{% url 'like-api-toggle' pk=post.pk %}' data-likes='{{ post.likes.count }}' href='{% url 'like-add' pk=post.pk %}'>{{ post.likes.count }} Мне нравится</a><span>
+    <span> <i class="date-f"></i>Дата публикации: {{ post.published_date|date:"d M Y" }}</span>
+    <ul>
+    </ul>
 </div>
 {% endfor %}
-</div>
-</div>
 
 
-<div class="pagination">
+
+<ul>
+</ul>
+<span class="pagination">
 {% get_pages %}
 {% if pages.paginated %}
     {{ pages.get_rendered }}
 {% endif %}
-</div>
+</span>
 <div class="popular">{% include 'polls/popular.html' %}</div>
+<ul>
+</ul>
 </div>
-
+</div>
+</div>
 {% endblock %}

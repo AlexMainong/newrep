@@ -35,8 +35,8 @@ header#page-header > div.row {
       left: 790px;
 }
 .comment {
-  border: solid 1px grey;
-  text-indent: 15px;
+
+  text-indent: 25px;
 }
 .add-5 {
   position: absolute;
@@ -44,16 +44,24 @@ header#page-header > div.row {
   font-weight: bold;
   margin-left: 15px;
 }
-.home {
-    display: inline-block;
-    width: 185px;
-    padding: 2px;
-    text-align: center;
-    outline: none;
-    font-size: 12pt;
-    font-weight: bolder;;
+.fi-home {
+    position: absolute;
+    margin-left: 70px;
+    font-size: 1.80rem;
+    margin-top: None;
 }
-.home:hover,
-.home:active {
- color: #000;
+.fi-pencil {
+  padding-right: 4px;
+}
+.fi-like {
+  padding-left: 4px;
+  display: inline-flex;
+}
+.date-f {
+  display: inline;
+  padding-left: 210px;
+}
+.pagination {
+  display: block;
+  text-align: center;
 }

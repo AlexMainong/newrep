@@ -3,10 +3,12 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{% static "static/css/foundation.css" %}">
         <link rel="stylesheet" type="text/css" href="{% static "static/css/style.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "static/css/foundation-icons/foundation-icons.css" %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src={% static "static/js/script.js" %}></script>
     </head>
              <div class="top-bar">
-                 <a class="home" href="{% url 'post_list' %}">Блог</a>
-
+                 <a class="fi-home" href="{% url 'post_list' %}"></a>
                   <section class="top-bar-right"
                    {% if username %}
                    <li><a href="/auth/logout/">Выйти ({{ username }})</a></li>

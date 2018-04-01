@@ -3,7 +3,6 @@
 </head>
 {% include 'polls/popular.html' %}
 {% block content %}
-
         <div class="body-f">
             <div class="row">
                 <div class="body">
@@ -16,7 +15,7 @@
 <p>Комментарии:</p>
 <div class="comment">
 {% for comment in comments %}
-    <strong><p>{{ comment.comment_from.username }} {{ comment.comment_date }}</p></strong>
+    <strong><p>{{ comment.comment_from.username }}</strong> {{ comment.comment_date|date:"d M Y" }}</p>
     <p>{{ comment.text }}</p>
     <hr/>
 {% endfor %}

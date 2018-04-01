@@ -5,4 +5,6 @@ admin.site.register(Post)
 admin.site.register(Comments)
 admin.site.register(PostStatistic, PostStatisticAdmin)
 
+
+
 # Register your models here.

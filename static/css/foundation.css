@@ -4456,7 +4456,7 @@ select {
   margin-left: 0;
   margin-bottom: 1rem; }
   .pagination::before, .pagination::after {
-    display: table;
+    display: block;;
     content: ' ';
     -ms-flex-preferred-size: 0;
         flex-basis: 0;
@@ -4468,15 +4468,15 @@ select {
     margin-right: 0.0625rem;
     border-radius: 0;
     font-size: 0.875rem;
-    display: none; }
+    display: inline; }
     .pagination li:last-child, .pagination li:first-child {
-      display: inline-block; }
+      display: inline-block;; }
     @media print, screen and (min-width: 40em) {
       .pagination li {
         display: inline-block; } }
   .pagination a,
   .pagination button {
-    display: block;
+    display: inline;;
     padding: 0.1875rem 0.625rem;
     border-radius: 0;
     color: #0a0a0a; }
